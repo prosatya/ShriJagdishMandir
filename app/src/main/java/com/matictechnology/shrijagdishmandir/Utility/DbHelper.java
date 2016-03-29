@@ -123,6 +123,7 @@ public class DbHelper extends SQLiteOpenHelper
 
     public boolean checkLogin(SQLiteDatabase db,String email)
     {
+
         String select_Query="select * from User where email='"+email+"'";
         Cursor c=db.rawQuery(select_Query,null);
         if (c.getCount()>0)
