@@ -19,6 +19,9 @@ public class DbHelper extends SQLiteOpenHelper
 {
 
     //fgnkdfjkbndfb
+
+
+
     private SQLiteDatabase db;
 
     public DbHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version)
