@@ -113,11 +113,12 @@ public class DbHelper extends SQLiteOpenHelper
             for(int count=1;count<c.getCount();count++)
             {
                 n.setId(c.getString(0));
-                n.setHead();
+                //n.setHead();
             }
         }
         else
             return true;
+        return true;
     }
 
     public boolean checkLogin(SQLiteDatabase db,String email)
