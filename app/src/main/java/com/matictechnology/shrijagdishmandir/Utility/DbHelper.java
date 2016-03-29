@@ -93,6 +93,7 @@ public class DbHelper extends SQLiteOpenHelper
     {
         String select_Query="select * from Notifications where id='"+id+"'";
         Cursor c=db.rawQuery(select_Query,null);
+        
         if (c.getCount()>0)
         {
             return false;
