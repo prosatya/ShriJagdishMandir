@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:ads = "http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_above="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_above="@+id/adView"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.CardView
+                    app:cardBackgroundColor="@color/background"
+                    android:layout_width="match_parent"
+                    app:cardElevation="8dp"
+                    android:layout_height="fill_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <TextView
+                                android:text="@string/temple44"
+                                android:textStyle="bold"
+                                android:textAlignment="center"
+                                android:textColor="#ff0000"
+                                android:textSize="16dp"
+                                android:layout_width="match_parent"
+                                android:paddingTop="5dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_height="wrap_content" />
+
+                            <ImageView
+                                android:src="@drawable/bhopal"
+                                android:layout_width="match_parent"
+                                android:layout_height="200dp" />
+
+                            <TableLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <TableRow>
+                                    <TextView
+                                        android:layout_marginTop="10dp"
+                                        android:textSize="13dp"
+                                        android:text="Address:"
+                                        android:layout_width="match_parent"
+                                        android:paddingTop="5dp"
+                                        android:layout_marginLeft="15dp"
+                                        android:layout_height="wrap_content" />
+                                    <TextView
+                                        android:layout_marginTop="10dp"
+                                        android:textSize="13dp"
+                                        android:layout_weight="1"
+                                        android:text="@string/temple44"
+                                        android:layout_width="match_parent"
+                                        android:paddingTop="5dp"
+                                        android:layout_marginLeft="15dp"
+                                        android:layout_height="wrap_content" />
+                                </TableRow>
+
+                                <TableRow>
+                                    <TextView
+                                        android:layout_marginTop="10dp"
+                                        android:textSize="13dp"
+                                        android:text="Contact:"
+                                        android:layout_width="match_parent"
+                                        android:paddingTop="5dp"
+                                        android:layout_marginLeft="15dp"
+                                        android:layout_height="wrap_content" />
+                                    <TextView
+                                        android:layout_marginTop="10dp"
+                                        android:textSize="13dp"
+                                        android:layout_weight="1"
+                                        android:text="@string/contact_no"
+                                        android:layout_width="match_parent"
+                                        android:paddingTop="5dp"
+                                        android:layout_marginLeft="15dp"
+                                        android:layout_height="wrap_content" />
+                                </TableRow>
+
+                            </TableLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/job_line1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="20dp"
+                            android:layout_centerHorizontal="true">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="20dp"
+                                    android:text="Gallery"
+                                    android:textColor="#BDBDBD"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_gravity="center">
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="#BDBDBD"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:layout_height="match_parent">
+                            <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+                                android:id="@+id/gridview"
+                                android:layout_width="match_parent"
+                                android:layout_height="300dp"
+                                android:numColumns="auto_fit"
+                                android:columnWidth="90dp"
+                                android:horizontalSpacing="10dp"
+                                android:verticalSpacing="10dp"
+                                android:gravity="center"
+                                android:stretchMode="columnWidth"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="BANNER"
+        android:layout_alignParentBottom="true"
+        ads:adUnitId="ca-app-pub-5520714536160496/9566836568">
+    </com.google.android.gms.ads.AdView>
+
+</RelativeLayout>
