@@ -647,7 +647,7 @@ public class ActivityMain extends AppCompatActivity
         {
             Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
             sharingIntent.setType("text/plain");
-            String shareBody = "Checkout this Awesome App.... =>link to app..";
+            String shareBody = "Checkout this Awesome App.... =>https://https://play.google.com/store/apps/details?id=com.matictechnology.shrijagdishmandir";
             sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Application u must try!");
             sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
             startActivity(Intent.createChooser(sharingIntent, "Share via"));
@@ -659,7 +659,7 @@ public class ActivityMain extends AppCompatActivity
             i.setData(Uri.parse(url));
             startActivity(i);
         }
-        else if (id == R.id.action_contact)
+        else if (id == R.id.Contact_Us)
         {
             Intent in=new Intent(ActivityMain.this, ActivityContactUs.class);
             startActivity(in);

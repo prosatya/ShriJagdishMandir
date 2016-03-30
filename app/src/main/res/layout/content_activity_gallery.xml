@@ -7,6 +7,29 @@
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F9D49E"
+        android:layout_above="@+id/adView">
+
+        <GridView
+
+            android:id="@+id/gridview"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:columnWidth="100dp"
+            android:drawSelectorOnTop="true"
+            android:gravity="center"
+            android:numColumns="auto_fit"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="5dp"
+            android:focusable="true"
+            android:clickable="true"/>
+
+    </RelativeLayout>
+    <!--
     <LinearLayout
         android:layout_above="@+id/adView"
         android:layout_width="match_parent"
@@ -22,7 +45,7 @@
             android:verticalSpacing="10dp"
             android:gravity="center"
             android:stretchMode="columnWidth"/>
-    </LinearLayout>
+    </LinearLayout>-->
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"

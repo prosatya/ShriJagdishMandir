@@ -114,4 +114,16 @@
     <string name="reg_tehsil">तहसील</string>
     <string name="reg_district">जिला</string>
     <string name="reg_register">रजिस्टर</string>
+
+    <string-array name="image_ids">
+        <item>@drawable/ujjain1</item>
+        <item>@drawable/ujjain2</item>
+        <item>@drawable/ujjain3</item>
+        <item>@drawable/ujjain4</item>
+        <item>@drawable/ujjain5</item>
+        <item>@drawable/ujjain6</item>
+        <item>@drawable/ujjain7</item>
+        <item>@drawable/ujjain8</item>
+        <item>@drawable/ujjain9</item>
+    </string-array>
 </resources>
