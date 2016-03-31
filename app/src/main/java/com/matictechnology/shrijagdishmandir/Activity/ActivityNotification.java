@@ -68,9 +68,23 @@ public class ActivityNotification extends AppCompatActivity implements View.OnCl
 
         list=new ArrayList<>();
         list=helper.getAllNotification(db);
-        Log.e("notification","list size="+list.size());
-        NotificationAdapter adapter=new NotificationAdapter(ActivityNotification.this,R.layout.item_notification,list);
-        noti_list.setAdapter(adapter);
+        if(list==null)
+        {
+            list=new ArrayList<>();
+            Notifications n=new Notifications();
+            n.setHead("No Notifications Yet!");
+            n.setBody("");
+            list.add(n);
+            NotificationAdapter adapter=new NotificationAdapter(ActivityNotification.this,R.layout.item_notification,list);
+            noti_list.setAdapter(adapter);
+        }
+        else
+        {
+            NotificationAdapter adapter=new NotificationAdapter(ActivityNotification.this,R.layout.item_notification,list);
+            noti_list.setAdapter(adapter);
+        }
+        //Log.e("notification","list size="+list.size());
+
 
         noti_list.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {

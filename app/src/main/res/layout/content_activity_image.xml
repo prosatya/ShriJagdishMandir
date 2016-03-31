@@ -3,7 +3,6 @@
     android:id="@+id/rootlayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:paddingTop="@dimen/activity_vertical_margin">
@@ -48,6 +47,7 @@
         <com.matictechnology.shrijagdishmandir.Utility.ClipRevealFrame
             android:id="@+id/menu_layout"
             android:layout_width="match_parent"
+            xmlns:app="http://schemas.android.com/tools"
             android:layout_height="match_parent"
             android:background="@color/tumblr_primary"
             android:visibility="invisible"
