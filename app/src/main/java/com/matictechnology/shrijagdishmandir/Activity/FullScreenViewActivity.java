@@ -33,7 +33,9 @@ public class FullScreenViewActivity extends Activity
 
 		image_list=new ArrayList<>();
 		image_list.add(R.drawable.haridwar1);
+		image_list.add(R.drawable.haridwar);
 		image_list.add(R.drawable.haridwar2);
+		image_list.add(R.drawable.omkareshwar);
 		image_list.add(R.drawable.omkareshwar1);
 		image_list.add(R.drawable.omkareshwar3);
 		image_list.add(R.drawable.omkareshwar2);
@@ -48,6 +50,9 @@ public class FullScreenViewActivity extends Activity
 		image_list.add(R.drawable.ujjain7);
 		image_list.add(R.drawable.ujjain8);
 		image_list.add(R.drawable.ujjain9);
+		image_list.add(R.drawable.awalighat);
+		image_list.add(R.drawable.bhopal);
+		image_list.add(R.drawable.jagdishmandir);
 
 		Intent i = getIntent();
 		int position = i.getIntExtra("position", 0);

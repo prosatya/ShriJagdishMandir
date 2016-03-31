@@ -2,6 +2,7 @@ package com.matictechnology.shrijagdishmandir.Utility;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,7 @@ public class GridViewAdapter extends ArrayAdapter
     private int layoutResourceId;
     private ArrayList<Integer> data = new ArrayList<>();
 
-    public GridViewAdapter(Context context, int layoutResourceId, ArrayList data)
+    public GridViewAdapter(Context context, int layoutResourceId, ArrayList<Integer> data)
     {
         super(context, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
@@ -34,6 +35,8 @@ public class GridViewAdapter extends ArrayAdapter
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
+        Log.e("size of list=>",""+data.size());
+
         View row = convertView;
         ViewHolder holder = null;
 
@@ -51,7 +54,7 @@ public class GridViewAdapter extends ArrayAdapter
         }
 
         //ImageItem item =
-        //holder.image.setImageBitmap(data.get(position));
+        holder.image.setImageResource(data.get(position));//ImageBitmap(data.get(position));
         return row;
     }
 

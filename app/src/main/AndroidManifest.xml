@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <!-- Register the Alarm Receiver -->
     <application
@@ -13,9 +13,13 @@
         android:label="@string/app_name_eng"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
 
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
         <receiver android:name=".Activity.AlarmReceiver" />
+
+        <service android:name=".Utility.AlarmService" />
 
         <activity
             android:name=".Activity.ActivityMain"
@@ -101,7 +105,8 @@
         <activity
             android:name=".Activity.ActivitySettings"
             android:label="@string/title_activity_activity_settings"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Activity.ActivityNotiMsg"></activity>
     </application>
 
 </manifest>

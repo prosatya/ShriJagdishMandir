@@ -18,14 +18,27 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary">
             <!--setting the label for the activity to be shown on toolbar-->
-            <TextView
-                android:layout_marginRight="10dp"
-                android:textAlignment="center"
-                android:textColor="#ffffff"
-                android:textSize="20dp"
-                android:text="|| श्री जगदीश मंदिर ||"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:gravity="end"
+                    android:layout_marginRight="10dp"
+                    android:textAlignment="center"
+                    android:textColor="#ffffff"
+                    android:textSize="20dp"
+                    android:text="|| श्री जगदीश मंदिर ||"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:layout_marginRight="15dp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/noti"
+                    android:id="@+id/notification"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+            </RelativeLayout>
             </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>

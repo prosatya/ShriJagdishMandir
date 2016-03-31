@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.GridView;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -49,7 +50,7 @@ public class ActivityImage extends AppCompatActivity implements View.OnTouchList
     ImageSwitcher imageSwitcher;
     ImageView myView;
     TextView p,n;
-    ArrayList<Integer> al;
+    ArrayList<Integer> image_list;
     int size,curr;
     int position;
     @Override
@@ -69,16 +70,39 @@ public class ActivityImage extends AppCompatActivity implements View.OnTouchList
 // Load ads into Banner Ads
         adView_footer.loadAd(adRequest_footer);
 
+
+        image_list=new ArrayList<>();
+        image_list.add(R.drawable.haridwar1);
+        image_list.add(R.drawable.haridwar);
+        image_list.add(R.drawable.haridwar2);
+        image_list.add(R.drawable.omkareshwar);
+        image_list.add(R.drawable.omkareshwar1);
+        image_list.add(R.drawable.omkareshwar3);
+        image_list.add(R.drawable.omkareshwar2);
+        image_list.add(R.drawable.ujjain1);
+        image_list.add(R.drawable.ujjain2);
+        image_list.add(R.drawable.ujjain3);
+        image_list.add(R.drawable.ujjain4);
+        image_list.add(R.drawable.ujjain5);
+        image_list.add(R.drawable.ujjain6);
+        image_list.add(R.drawable.ujjain5);
+        image_list.add(R.drawable.ujjain6);
+        image_list.add(R.drawable.ujjain7);
+        image_list.add(R.drawable.ujjain8);
+        image_list.add(R.drawable.ujjain9);
+        image_list.add(R.drawable.awalighat);
+        image_list.add(R.drawable.bhopal);
+        image_list.add(R.drawable.jagdishmandir);
+
+
         p.setText("  <");
         n.setText(">  ");
         Intent in=getIntent();
         position=in.getIntExtra("position", -1);
-        al=new ArrayList<>();
-        al=in.getIntegerArrayListExtra("image_list");
 
-        size=al.size();
 
-        myView.setImageResource(al.get(position));
+        size=image_list.size();
+        myView.setImageResource(image_list.get(position));
         curr=position;
         Log.e("current=>", "" + curr);
         Log.e("position=>", "" + position);
@@ -95,7 +119,7 @@ public class ActivityImage extends AppCompatActivity implements View.OnTouchList
                 {
                     Log.e("current=>", "" + curr);
                     curr++;
-                    myView.setImageResource(al.get(curr));
+                    myView.setImageResource(image_list.get(curr));
                     Log.e("current=>", "after change");
                     Log.e("current=>", "" + curr);
                 }
@@ -103,7 +127,7 @@ public class ActivityImage extends AppCompatActivity implements View.OnTouchList
                 {
                     Log.e("current=>", "" + curr);
                     curr=0;
-                    myView.setImageResource(al.get(curr));
+                    myView.setImageResource(image_list.get(curr));
                     Log.e("current=>", "after change");
                     Log.e("current=>", "" + curr);
                 }
@@ -118,13 +142,13 @@ public class ActivityImage extends AppCompatActivity implements View.OnTouchList
                 if (curr > 0) {
                     Log.e("current=>", "" + curr);
                     curr--;
-                    myView.setImageResource(al.get(curr));
+                    myView.setImageResource(image_list.get(curr));
                     Log.e("current=>", "after change");
                     Log.e("current=>", "" + curr);
                 } else {
                     Log.e("current=>", "" + curr);
                     curr = size - 1;
-                    myView.setImageResource(al.get(curr));
+                    myView.setImageResource(image_list.get(curr));
                     Log.e("current=>", "after change");
                     Log.e("current=>", "" + curr);
                 }

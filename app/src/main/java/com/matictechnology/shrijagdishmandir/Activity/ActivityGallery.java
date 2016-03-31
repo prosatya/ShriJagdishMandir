@@ -35,27 +35,32 @@ public class ActivityGallery extends AppCompatActivity
 
         gridView = (GridView) findViewById(R.id.gridview);
 
-        gridView.setAdapter(gridAdapter);
-
         image_list=new ArrayList<>();
-        image_list.add(R.drawable.haridwar1);
-        image_list.add(R.drawable.haridwar2);
-        image_list.add(R.drawable.omkareshwar1);
-        image_list.add(R.drawable.omkareshwar3);
-        image_list.add(R.drawable.omkareshwar2);
-        image_list.add(R.drawable.ujjain1);
-        image_list.add(R.drawable.ujjain2);
-        image_list.add(R.drawable.ujjain3);
-        image_list.add(R.drawable.ujjain4);
-        image_list.add(R.drawable.ujjain5);
-        image_list.add(R.drawable.ujjain6);
-        image_list.add(R.drawable.ujjain5);
-        image_list.add(R.drawable.ujjain6);
-        image_list.add(R.drawable.ujjain7);
-        image_list.add(R.drawable.ujjain8);
-        image_list.add(R.drawable.ujjain9);
+        image_list.add(R.drawable.haridwar1_thumb);
+        image_list.add(R.drawable.haridwar);
+        image_list.add(R.drawable.haridwar2_thumb);
+        image_list.add(R.drawable.omkareshwar);
+        image_list.add(R.drawable.omkareshwar1_thumb);
+        image_list.add(R.drawable.omkareshwar3_thumb);
+        image_list.add(R.drawable.omkareshwar2_thumb);
+        image_list.add(R.drawable.ujjain1_thumb);
+        image_list.add(R.drawable.ujjain2_thumb);
+        image_list.add(R.drawable.ujjain3_thumb);
+        image_list.add(R.drawable.ujjain4_thumb);
+        image_list.add(R.drawable.ujjain5_thumb);
+        image_list.add(R.drawable.ujjain6_thumb);
+        image_list.add(R.drawable.ujjain5_thumb);
+        image_list.add(R.drawable.ujjain6_thumb);
+        image_list.add(R.drawable.ujjain7_thumb);
+        image_list.add(R.drawable.ujjain8_thumb);
+        image_list.add(R.drawable.ujjain9_thumb);
+        image_list.add(R.drawable.awalighat);
+        image_list.add(R.drawable.bhopal);
+        image_list.add(R.drawable.jagdishmandir_thumb);
 
         gridAdapter = new GridViewAdapter(this, R.layout.grid_item_layout, image_list);
+
+        gridView.setAdapter(gridAdapter);
 
         AdView adView_footer = (AdView)findViewById(R.id.adView);
 // Request for Ads
@@ -76,10 +81,9 @@ public class ActivityGallery extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View v, int position, long id)
             {
                 //Create intent
-                Intent intent = new Intent(ActivityGallery.this, ActivityImage.class);
-                intent.putExtra("position", position);
-                //Start details activity
-                startActivity(intent);
+                Intent in = new Intent(ActivityGallery.this, FullScreenViewActivity.class);
+                in.putExtra("position", position);
+                startActivity(in);
             }
         });
 

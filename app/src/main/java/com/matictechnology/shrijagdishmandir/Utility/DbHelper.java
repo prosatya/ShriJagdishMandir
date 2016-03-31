@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
@@ -41,15 +42,17 @@ public class DbHelper extends SQLiteOpenHelper
                 "district text, " +
                 "gotra text, " +
                 "mobile integer) ";
+
         String notification_query="create table Notifications(id integer primary key," +
                 " head text, " +
                 "body text, " +
-                "date text, ";
+                "date text);";
 
         try
         {
-            db.execSQL(user_query);
+
             db.execSQL(notification_query);
+            db.execSQL(user_query);
         }
         catch (SQLException e)
         {
@@ -70,7 +73,7 @@ public class DbHelper extends SQLiteOpenHelper
         initialValues.put("id", id);
         initialValues.put("head", head);
         initialValues.put("body", body);
-        initialValues.put("village", date);
+        initialValues.put("date", date);
         return db.insert("Notifications", null, initialValues);
     }
 
@@ -91,34 +94,76 @@ public class DbHelper extends SQLiteOpenHelper
     public boolean checkNotification(SQLiteDatabase db,String id)
     {
         String select_Query="select * from Notifications where id='"+id+"'";
-        Cursor c=db.rawQuery(select_Query,null);
-
-        if (c.getCount()>0)
+        try
         {
+            Cursor c=db.rawQuery(select_Query,null);
+            c.moveToFirst();
+            if (c.getCount()>0)
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+        catch(SQLiteException e)
+        {
+            e.printStackTrace();
             return false;
         }
-        else
-            return true;
+
     }
 
-    public boolean getNotification(SQLiteDatabase db, String date)
+    public ArrayList<Notifications> getNotification(SQLiteDatabase db, String date)
     {
+        ArrayList<Notifications> temp = null;
         String select_Query="select * from Notifications where date='"+date+"'";
         Cursor c=db.rawQuery(select_Query,null);
         c.moveToFirst();
         if (c.getCount()>0)
         {
-            ArrayList<String> temp=new ArrayList<String>();
-            Notifications n=new Notifications();
-            for(int count=1;count<c.getCount();count++)
+            temp=new ArrayList<>();
+            Notifications n;//=new Notifications();
+            for(int count=0;count<c.getCount();count++)
             {
+                n=new Notifications();
                 n.setId(c.getString(0));
-                //n.setHead();
+                n.setHead(c.getString(1));
+                n.setBody(c.getString(2));
+                n.setDate(c.getString(3));
+                c.moveToNext();
+                temp.add(n);
             }
+            return temp;
         }
         else
-            return true;
-        return true;
+            return null;
+
+    }
+    public ArrayList<Notifications> getAllNotification(SQLiteDatabase db)
+    {
+        ArrayList<Notifications> temp = null;
+        String select_Query="select * from Notifications";
+        Cursor c=db.rawQuery(select_Query,null);
+        c.moveToFirst();
+        if (c.getCount()>0)
+        {
+            temp=new ArrayList<>();
+            Notifications n;//=new Notifications();
+            for(int count=0;count<c.getCount();count++)
+            {
+                n=new Notifications();
+                n.setId(c.getString(0));
+                n.setHead(c.getString(1));
+                n.setBody(c.getString(2));
+                n.setDate(c.getString(3));
+                c.moveToNext();
+                temp.add(n);
+            }
+            return temp;
+        }
+        else
+            return null;
+
     }
 
     public boolean checkLogin(SQLiteDatabase db,String email)

@@ -70,8 +70,8 @@ public class OmkareshwarCardFragment extends Fragment {
 // Load ads into Banner Ads
             adView.loadAd(adRequest);
 
-            GridView gridview = (GridView)itemView1.findViewById(R.id.gridview);
-            gridview.setAdapter(new ImageAdapter(getContext()));
+            //GridView gridview = (GridView)itemView1.findViewById(R.id.gridview);
+            //gridview.setAdapter(new ImageAdapter(getContext()));
         }
         else if(position==1)
         {

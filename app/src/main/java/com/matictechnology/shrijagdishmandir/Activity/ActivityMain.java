@@ -6,6 +6,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
@@ -31,22 +32,28 @@ import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.matictechnology.shrijagdishmandir.R;
+import com.matictechnology.shrijagdishmandir.Utility.AlarmService;
 import com.matictechnology.shrijagdishmandir.Utility.AnimatorUtils;
 import com.matictechnology.shrijagdishmandir.Utility.ClipRevealFrame;
 import com.matictechnology.shrijagdishmandir.Utility.DbHelper;
 import com.matictechnology.shrijagdishmandir.Utility.MainCardFragment;
 import com.ogaclejapan.arclayout.ArcLayout;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class ActivityMain extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener
 {
+    ImageView notification;
     int pause_flag=-1;  //for fab hide and show on pause and resume of activity
     View rootLayout;    //layout to show fab on
     ClipRevealFrame menuLayout;     //hidden full fab menu
@@ -75,6 +82,7 @@ public class ActivityMain extends AppCompatActivity
         setContentView(R.layout.activity_main);
         //inflating the xml in the activity
 
+        notification= (ImageView)findViewById(R.id.notification);
         rootLayout = findViewById(R.id.rootlayout);
         menuLayout = (ClipRevealFrame) findViewById(R.id.menu_layout);
         arcLayout = (ArcLayout) findViewById(R.id.arc_layout);
@@ -83,6 +91,10 @@ public class ActivityMain extends AppCompatActivity
         //initializing all the required elements from the xml to use them in the java class
 
         centerItem.setOnClickListener(this);
+
+
+
+
         //on click listener for fab full menu center button
 
         for (int i = 0, size = arcLayout.getChildCount(); i < size; i++)
@@ -91,6 +103,16 @@ public class ActivityMain extends AppCompatActivity
 
         findViewById(R.id.fab).setOnClickListener(this);
         //onclick listener for fab
+
+        notification.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent in=new Intent(ActivityMain.this,ActivityNotification.class);
+                startActivity(in);
+            }
+        });
 
         DbHelper dbhelper = new DbHelper(ActivityMain.this);
         //initialising dh helper class
@@ -114,13 +136,16 @@ public class ActivityMain extends AppCompatActivity
             ci="Register";
             center_item.setText(ci);
             Log.e("login check", "not logged in");
+
             //catlog message to show the current status of user login
         }
 
-        //setting alarm so as to get notification at 6pm
+        startService(new Intent(getBaseContext(), AlarmService.class));
+
+        /*//setting alarm so as to get notification at 6pm
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, 18);
-        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.MINUTE, 10);
         calendar.set(Calendar.SECOND, 0);
         Intent intent1 = new Intent(ActivityMain.this, AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(ActivityMain.this, 0,intent1, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -136,7 +161,7 @@ public class ActivityMain extends AppCompatActivity
         PendingIntent pendingIntent1 = PendingIntent.getBroadcast(ActivityMain.this, 0,intent11, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager am1 = (AlarmManager) ActivityMain.this.getSystemService(ActivityMain.this.ALARM_SERVICE);
         am1.setRepeating(AlarmManager.RTC_WAKEUP, calendar1.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent1);
-
+*/
         //setting toolbar and it's title to blank to show hindi centered label
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
@@ -238,11 +263,8 @@ public class ActivityMain extends AppCompatActivity
                 //starting registration page
                 Intent in=new Intent(ActivityMain.this,ActivityRegister.class);
                 startActivity(in);
-
             }
-
         }
-
     }
 
     @Override

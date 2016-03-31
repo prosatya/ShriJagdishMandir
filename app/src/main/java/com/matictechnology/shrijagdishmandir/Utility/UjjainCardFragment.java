@@ -39,7 +39,8 @@ public class UjjainCardFragment extends Fragment {
 
     private int position;
 
-    public static UjjainCardFragment newInstance(int position) {
+    public static UjjainCardFragment newInstance(int position)
+    {
         UjjainCardFragment f = new UjjainCardFragment();
         Bundle b = new Bundle();
         b.putInt(ARG_POSITION, position);
@@ -66,8 +67,8 @@ public class UjjainCardFragment extends Fragment {
 
 
 
-            GridView gridview = (GridView)itemView1.findViewById(R.id.gridview);
-            gridview.setAdapter(new ImageAdapter(getContext()));
+            /*GridView gridview = (GridView)itemView1.findViewById(R.id.gridview);
+            gridview.setAdapter(new ImageAdapter(getContext()));*/
         }
         else if(position==1)
         {

@@ -8,6 +8,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -18,6 +20,7 @@ import android.util.Log;
 
 import com.matictechnology.shrijagdishmandir.R;
 import com.matictechnology.shrijagdishmandir.Utility.DbHelper;
+import com.matictechnology.shrijagdishmandir.classes.Notifications;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -32,6 +35,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -40,13 +44,15 @@ import java.util.Date;
  */
 public class AlarmReceiver extends BroadcastReceiver
 {
+    int size=0;
+    ArrayList<Notifications> list;
     Context c;
     @Override
     public void onReceive(Context context, Intent intent)
     {
         Log.e("called alarm.....","in alarm......");
         c=context;
-
+        list=new ArrayList<>();
         Notification_task task=new Notification_task();
         task.execute();
     }
@@ -55,7 +61,7 @@ public class AlarmReceiver extends BroadcastReceiver
         NotificationManager notificationManager = (NotificationManager) c.getSystemService(c.NOTIFICATION_SERVICE);
         @SuppressWarnings("deprecation")
 
-        Notification notification = new Notification(R.drawable.shh_logo,"New Message", System.currentTimeMillis());
+        Notification notification;// = new Notification(R.drawable.shh_logo,"New Message", System.currentTimeMillis());
         Intent notificationIntent = new Intent(c,ActivityNotification.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(c, 0,notificationIntent, 0);
 
@@ -67,6 +73,8 @@ public class AlarmReceiver extends BroadcastReceiver
         builder.setLights(Color.RED, 3000, 3000);
         builder.setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
         builder.setContentTitle(notificationTitle);
+        Bitmap largeIcon = BitmapFactory.decodeResource(c.getResources(),R.drawable.sri);
+        builder.setLargeIcon(largeIcon);
         builder.setContentText(notificationMessage);
         builder.setSmallIcon(R.drawable.sri);
         builder.setContentIntent(pendingIntent);
@@ -81,6 +89,47 @@ public class AlarmReceiver extends BroadcastReceiver
         notificationManager.notify(9999, notification);
     }
 
+    private void Notify(ArrayList<Notifications> list,Context c)
+    {
+        Notification notification;
+        Intent notificationIntent;
+        PendingIntent pendingIntent;
+        Notification.Builder builder;
+        Log.e("size=>",""+list.size());
+        for(int count=0;count<list.size();count++)
+        {
+            NotificationManager notificationManager = (NotificationManager) c.getSystemService(c.NOTIFICATION_SERVICE);
+
+            //notification = new Notification(R.drawable.shh_logo,"New Message", System.currentTimeMillis());
+            notificationIntent = new Intent(c,ActivityNotification.class);
+            pendingIntent = PendingIntent.getActivity(c, 0,notificationIntent, 0);
+
+            builder = new Notification.Builder(c);
+
+            builder.setAutoCancel(true);
+            builder.setTicker(list.get(count).getHead());
+            builder.setVibrate(new long[]{500, 500, 500, 500, 500});
+            builder.setLights(Color.RED, 3000, 3000);
+            builder.setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
+            builder.setContentTitle(list.get(count).getHead());
+            builder.setContentText(list.get(count).getBody());
+            Bitmap largeIcon = BitmapFactory.decodeResource(c.getResources(),R.drawable.sri);
+            builder.setLargeIcon(largeIcon);
+            builder.setSmallIcon(R.drawable.sri);
+            builder.setContentIntent(pendingIntent);
+            //builder.setSubText(notificationMessage);   //API level 16
+            //builder.setNumber(100);
+            builder.build();
+
+            notification = builder.getNotification();
+            //manager.notify(11, myNotication);
+
+            //notification.setLatestEventInfo(ActivityNotification.this, notificationTitle,notificationMessage, pendingIntent);
+            notificationManager.notify(count+1001, notification);
+        }
+
+    }
+
     public class Notification_task extends AsyncTask<String, String,String>
     {
         @Override
@@ -92,7 +141,8 @@ public class AlarmReceiver extends BroadcastReceiver
                 DbHelper helper=new DbHelper(c);
                 SQLiteDatabase db=helper.getWritableDatabase();
                 JSONArray arr=new JSONArray(s);
-                for(int count=1;count<arr.length();count++)
+                size=arr.length();
+                for(int count=0;count<arr.length();count++)
                 {
                     JSONObject obj=arr.getJSONObject(count);
                     String id=obj.getString("id");
@@ -100,21 +150,36 @@ public class AlarmReceiver extends BroadcastReceiver
                     String headn = obj.getString("head");
                     String bodyn=obj.getString("body");
 
+
+
                     Calendar cal = Calendar.getInstance();
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                     String strDate = sdf.format(cal.getTime());
+
 
                     SimpleDateFormat sdf1 = new SimpleDateFormat();
                     sdf1.applyPattern("dd/MM/yyyy");
                     Date date = sdf1.parse(daten);
                     daten=sdf1.format(date);
-                    Log.e("date n=>",""+daten);
+
+                    Notifications n=new Notifications();
+                    n.setId(id);
+                    n.setHead(headn);
+                    n.setBody(bodyn);
+                    n.setDate(daten);
+                    if(strDate.equals(daten))
+                        list.add(n);
+                    Log.e("date n=>", "" + daten);
                     Log.e("title n=>", "" + headn);
                     Log.e("text n=>", "" + bodyn);
-                    Notify(headn, bodyn, c);
-                    if(helper.checkNotification(db,id))
+                    Log.e("size of list=>", "" + list.size());
+
+                    if(!helper.checkNotification(db,id))
                         helper.insertNotifications(db,id,headn,bodyn,daten);
                 }
+
+
+                Notify(list, c);
             }
             catch (JSONException e)
             {
@@ -129,7 +194,6 @@ public class AlarmReceiver extends BroadcastReceiver
         @Override
         protected String doInBackground(String... strings)
         {
-
             String result="";
             try
             {
