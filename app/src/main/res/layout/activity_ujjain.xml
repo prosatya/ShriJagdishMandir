@@ -41,14 +41,7 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"/>
 
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        ads:adSize="BANNER"
-        android:layout_alignParentBottom="true"
-        ads:adUnitId="ca-app-pub-5520714536160496/9566836568">
-    </com.google.android.gms.ads.AdView>
+
 
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

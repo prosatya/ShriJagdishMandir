@@ -1,29 +1,48 @@
 package com.matictechnology.shrijagdishmandir.Activity;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.matictechnology.shrijagdishmandir.R;
+import com.matictechnology.shrijagdishmandir.Utility.AnimatorUtils;
+import com.matictechnology.shrijagdishmandir.Utility.ClipRevealFrame;
+import com.matictechnology.shrijagdishmandir.Utility.DbHelper;
 import com.matictechnology.shrijagdishmandir.Utility.GridViewAdapter;
 import com.matictechnology.shrijagdishmandir.Utility.ImageAdapter;
 import com.matictechnology.shrijagdishmandir.classes.ImageItem;
+import com.ogaclejapan.arclayout.ArcLayout;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ActivityGallery extends AppCompatActivity
 {
+
+    DbHelper dbhelper;  //Database helper class for storing and accessing the data
+    SQLiteDatabase db;  //SQLiteDatabase object to gain read or write access to the DB
     ArrayList<Integer> image_list;
     private GridView gridView;
     private GridViewAdapter gridAdapter;
@@ -86,8 +105,6 @@ public class ActivityGallery extends AppCompatActivity
                 startActivity(in);
             }
         });
-
-
     }
     private ArrayList<ImageItem> getData()
     {

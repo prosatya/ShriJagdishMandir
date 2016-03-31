@@ -65,7 +65,11 @@ public class UjjainCardFragment extends Fragment {
         {
             itemView1=inflater1.inflate(R.layout.pager_ujjain1, null);
 
-
+            AdView adView = (AdView)itemView1.findViewById(R.id.adView);
+// Request for Ads
+            AdRequest adRequest = new AdRequest.Builder().build();
+// Load ads into Banner Ads
+            adView.loadAd(adRequest);
 
             /*GridView gridview = (GridView)itemView1.findViewById(R.id.gridview);
             gridview.setAdapter(new ImageAdapter(getContext()));*/
@@ -74,6 +78,11 @@ public class UjjainCardFragment extends Fragment {
         {
             itemView1=inflater1.inflate(R.layout.pager_ujjain2_darshan, null);
 
+            AdView adView = (AdView)itemView1.findViewById(R.id.adView);
+// Request for Ads
+            AdRequest adRequest = new AdRequest.Builder().build();
+// Load ads into Banner Ads
+            adView.loadAd(adRequest);
 
             page_text=(TextView)itemView1.findViewById(R.id.page_text);
             darshan_list=(ListView)itemView1.findViewById(R.id.darshan_list);
@@ -177,6 +186,11 @@ public class UjjainCardFragment extends Fragment {
         {
             itemView1=inflater1.inflate(R.layout.pager_ujjain2_ghat, null);
 
+            AdView adView = (AdView)itemView1.findViewById(R.id.adView);
+// Request for Ads
+            AdRequest adRequest = new AdRequest.Builder().build();
+// Load ads into Banner Ads
+            adView.loadAd(adRequest);
 
             ListView ghat_list=(ListView)itemView1.findViewById(R.id.ghat_list);
 

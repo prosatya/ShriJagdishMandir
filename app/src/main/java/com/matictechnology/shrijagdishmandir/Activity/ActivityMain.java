@@ -51,9 +51,16 @@ import java.util.Date;
 import java.util.List;
 
 public class ActivityMain extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener
+        implements View.OnClickListener,NavigationView.OnNavigationItemSelectedListener
 {
     ImageView notification;
+
+    private static final long delay = 2000L;    //delay for double press exit
+    private boolean mRecentlyBackPressed = false;   //flag for double click exit
+    private Handler mExitHandler = new Handler();   //handler class object to check for the delay between double exit button pressed
+    private PagerSlidingTabStrip tabs;  //tab strip for the pager slider
+    private ViewPager pager;    //pager object for switching fragments in
+    private MyPagerAdapter adapter; //pager adapter to help changing the fragments on pager
     int pause_flag=-1;  //for fab hide and show on pause and resume of activity
     View rootLayout;    //layout to show fab on
     ClipRevealFrame menuLayout;     //hidden full fab menu
@@ -63,12 +70,6 @@ public class ActivityMain extends AppCompatActivity
     int y;  //y coordinate on the layout to show and hide fab menu buttons
     float radiusOfFab;  //radius of fab
     float radiusFromFabToRoot;  //radius for hiding and showing the fab full menu
-    private static final long delay = 2000L;    //delay for double press exit
-    private boolean mRecentlyBackPressed = false;   //flag for double click exit
-    private Handler mExitHandler = new Handler();   //handler class object to check for the delay between double exit button pressed
-    private PagerSlidingTabStrip tabs;  //tab strip for the pager slider
-    private ViewPager pager;    //pager object for switching fragments in
-    private MyPagerAdapter adapter; //pager adapter to help changing the fragments on pager
     int center_item_flag=-1;    //flag variable to check for two buttons on center fab full menu button
     Button center_item; //fab full menu center button
     String ci;  //string for the center button of fab full menu
@@ -91,28 +92,6 @@ public class ActivityMain extends AppCompatActivity
         //initializing all the required elements from the xml to use them in the java class
 
         centerItem.setOnClickListener(this);
-
-
-
-
-        //on click listener for fab full menu center button
-
-        for (int i = 0, size = arcLayout.getChildCount(); i < size; i++)
-            arcLayout.getChildAt(i).setOnClickListener(this);
-        //setting onclick listener for all the fab full menu buttons other then center button
-
-        findViewById(R.id.fab).setOnClickListener(this);
-        //onclick listener for fab
-
-        notification.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                Intent in=new Intent(ActivityMain.this,ActivityNotification.class);
-                startActivity(in);
-            }
-        });
 
         DbHelper dbhelper = new DbHelper(ActivityMain.this);
         //initialising dh helper class
@@ -140,10 +119,32 @@ public class ActivityMain extends AppCompatActivity
             //catlog message to show the current status of user login
         }
 
+
+        //on click listener for fab full menu center button
+
+        for (int i = 0, size = arcLayout.getChildCount(); i < size; i++)
+            arcLayout.getChildAt(i).setOnClickListener(this);
+        //setting onclick listener for all the fab full menu buttons other then center button
+
+        findViewById(R.id.fab).setOnClickListener(this);
+        //onclick listener for fab
+
+        notification.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent in=new Intent(ActivityMain.this,ActivityNotification.class);
+                startActivity(in);
+            }
+        });
+
+
+
         startService(new Intent(getBaseContext(), AlarmService.class));
 
-        /*//setting alarm so as to get notification at 6pm
-        Calendar calendar = Calendar.getInstance();
+        //setting alarm so as to get notification at 6pm
+        /*Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, 18);
         calendar.set(Calendar.MINUTE, 10);
         calendar.set(Calendar.SECOND, 0);
