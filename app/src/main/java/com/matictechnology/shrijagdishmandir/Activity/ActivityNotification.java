@@ -49,6 +49,7 @@ public class ActivityNotification extends AppCompatActivity implements View.OnCl
     DbHelper dbhelper;  //Database helper class for storing and accessing the data
     SQLiteDatabase db;  //SQLiteDatabase object to gain read or write access to the DB
     ListView noti_list;
+    int exit_flag=-1;
     ArrayList<Notifications> list;
 
     @Override
@@ -56,6 +57,13 @@ public class ActivityNotification extends AppCompatActivity implements View.OnCl
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
+
+        Intent in=getIntent();
+        String str=in.getStringExtra("from main");
+        if(str==null)
+            exit_flag=1;
+        else
+            exit_flag=0;
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -82,22 +90,21 @@ public class ActivityNotification extends AppCompatActivity implements View.OnCl
         {
             NotificationAdapter adapter=new NotificationAdapter(ActivityNotification.this,R.layout.item_notification,list);
             noti_list.setAdapter(adapter);
+            noti_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Intent in = new Intent(ActivityNotification.this, ActivityNotiMsg.class);
+                    in.putExtra("head", list.get(i).getHead());
+                    in.putExtra("body", list.get(i).getBody());
+                    in.putExtra("date", list.get(i).getDate());
+                    startActivity(in);
+                }
+            });
         }
         //Log.e("notification","list size="+list.size());
 
 
-        noti_list.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
-            {
-                Intent in=new Intent(ActivityNotification.this,ActivityNotiMsg.class);
-                in.putExtra("head", list.get(i).getHead());
-                in.putExtra("body",list.get(i).getBody());
-                in.putExtra("date",list.get(i).getDate());
-                startActivity(in);
-            }
-        });
+
 
         rootLayout = findViewById(R.id.rootlayout);
         menuLayout = (ClipRevealFrame) findViewById(R.id.menu_layout);
@@ -149,10 +156,30 @@ public class ActivityNotification extends AppCompatActivity implements View.OnCl
     @Override
     public void onBackPressed()
     {
-        Intent in=new Intent(ActivityNotification.this,ActivityMain.class);
-        startActivity(in);
-        finish();
+        if(exit_flag==1)
+        {
+            Intent in=new Intent(ActivityNotification.this,ActivityMain.class);
+            startActivity(in);
+            finish();
+            overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
+        }
+        else if(exit_flag==0)
+        {
+            finish();
+            overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
+        }
+
+
     }
+
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+        overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+    }
+
+
 
     @Override
     public void onClick(View v)

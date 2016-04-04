@@ -26,6 +26,7 @@ import android.widget.GridView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.kogitune.activitytransition.ActivityTransitionLauncher;
 import com.matictechnology.shrijagdishmandir.R;
 import com.matictechnology.shrijagdishmandir.Utility.AnimatorUtils;
 import com.matictechnology.shrijagdishmandir.Utility.ClipRevealFrame;
@@ -102,7 +103,9 @@ public class ActivityGallery extends AppCompatActivity
                 //Create intent
                 Intent in = new Intent(ActivityGallery.this, FullScreenViewActivity.class);
                 in.putExtra("position", position);
-                startActivity(in);
+
+                ActivityTransitionLauncher.with(ActivityGallery.this).from(v.findViewById(R.id.image), "image").launch(in);
+
             }
         });
     }
@@ -116,6 +119,20 @@ public class ActivityGallery extends AppCompatActivity
             imageItems.add(new ImageItem(bitmap, "Image#" + i));
         }
         return imageItems;
+    }
+
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+        overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
     }
 
 }

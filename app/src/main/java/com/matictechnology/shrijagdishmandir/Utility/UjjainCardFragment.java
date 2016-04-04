@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.kogitune.activitytransition.ActivityTransitionLauncher;
 import com.matictechnology.shrijagdishmandir.Activity.ActivityTemple;
 import com.matictechnology.shrijagdishmandir.R;
 
@@ -25,6 +26,7 @@ import java.util.ArrayList;
  */
 public class UjjainCardFragment extends Fragment {
 
+    View itemView1=null;
     private static final String ARG_POSITION = "position";
 
     ArrayList<String> darshan_templename,darshan_text,darshan_text_full;
@@ -60,7 +62,7 @@ public class UjjainCardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         LayoutInflater inflater1 = (LayoutInflater) getContext().getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-        View itemView1=null;
+
         if(position==0)
         {
             itemView1=inflater1.inflate(R.layout.pager_ujjain1, null);
@@ -175,10 +177,13 @@ public class UjjainCardFragment extends Fragment {
                 {
                     Intent in=new Intent(getContext(),ActivityTemple.class);
                     Log.e("sending..", "" + darshan_templename.get(i) + "," + darshan_text_full.get(i) + "," + darshan_imagename.get(i) + "!");
-                    in.putExtra("darshan_templename",darshan_templename.get(i));
+                    in.putExtra("darshan_templename", darshan_templename.get(i));
                     in.putExtra("darshan_text_full",darshan_text_full.get(i));
-                    in.putExtra("darshan_imagename",darshan_imagename.get(i));
-                    startActivity(in);
+                    in.putExtra("darshan_imagename", darshan_imagename.get(i));
+
+                    //View v=itemView1.findViewById(darshan_imagename.get(i));
+                    ActivityTransitionLauncher.with(getActivity()).from(view.findViewById(R.id.darshan_image), "image").launch(in);
+
                 }
             });
         }
@@ -274,7 +279,7 @@ public class UjjainCardFragment extends Fragment {
                     in.putExtra("darshan_templename",ghat_name.get(i));
                     in.putExtra("darshan_text_full",ghat_text_full.get(i));
                     in.putExtra("darshan_imagename",ghat_imagename.get(i));
-                    startActivity(in);
+                    ActivityTransitionLauncher.with(getActivity()).from(view.findViewById(R.id.darshan_image), "image").launch(in);
                 }
             });
         }

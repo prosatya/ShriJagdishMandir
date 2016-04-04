@@ -33,6 +33,8 @@
     <string name="pager1tv22_text">शस्त हस्त समाहार, सहस्त्रा हस्त संकिर</string>
     <string name="pager1tv23_text">सेकड़ो हाथो से कमाओ , हजारो हाथो से दान करें !</string>
     <string name="pager1tv24_text">अन्नक्षेत्र स्थल पर प्रतिदिन के कार्यक्रम</string>
+
+
     <string name="pager1tv25_text">प्रातः 6 से 7:30 बजे तक ११ कुंडिय यज्ञ चलेगा।</string>
     <string name="pager1tv26_text">प्रातः 7:30 से 8:30 तक सभी श्रद्धालुओ  के लिए निशुल्क योग प्रशिक्षण होगा।</string>
     <string name="pager1tv27_text">प्रातः 10 से 12 बजे तक भोजन होगा।</string>
@@ -126,4 +128,5 @@
         <item>@drawable/ujjain8</item>
         <item>@drawable/ujjain9</item>
     </string-array>
+    <string name="title_activity_main3">Main3Activity</string>
 </resources>

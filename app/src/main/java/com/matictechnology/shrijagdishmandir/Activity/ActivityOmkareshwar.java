@@ -134,6 +134,20 @@ public class ActivityOmkareshwar extends AppCompatActivity implements View.OnCli
 
     }
 
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+        overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
+    }
+
     public class MyPagerAdapter extends FragmentPagerAdapter {
 
         private final String[] TITLES = { "जगदीश मंदिर"};

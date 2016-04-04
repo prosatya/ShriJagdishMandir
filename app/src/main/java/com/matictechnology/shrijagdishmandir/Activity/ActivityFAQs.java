@@ -98,6 +98,20 @@ public class ActivityFAQs extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+        overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
+    }
+
 
     @Override
     public void onClick(View v)

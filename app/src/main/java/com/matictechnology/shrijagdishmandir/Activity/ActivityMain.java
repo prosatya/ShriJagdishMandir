@@ -4,9 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
@@ -37,17 +34,14 @@ import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.matictechnology.shrijagdishmandir.R;
-import com.matictechnology.shrijagdishmandir.Utility.AlarmService;
+import com.matictechnology.shrijagdishmandir.AlarmService;
 import com.matictechnology.shrijagdishmandir.Utility.AnimatorUtils;
 import com.matictechnology.shrijagdishmandir.Utility.ClipRevealFrame;
 import com.matictechnology.shrijagdishmandir.Utility.DbHelper;
 import com.matictechnology.shrijagdishmandir.Utility.MainCardFragment;
 import com.ogaclejapan.arclayout.ArcLayout;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class ActivityMain extends AppCompatActivity
@@ -81,6 +75,8 @@ public class ActivityMain extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         //inflating the xml in the activity
 
         notification= (ImageView)findViewById(R.id.notification);
@@ -90,6 +86,7 @@ public class ActivityMain extends AppCompatActivity
         centerItem = findViewById(R.id.center_item);
         center_item= (Button)findViewById(R.id.center_item);
         //initializing all the required elements from the xml to use them in the java class
+
 
         centerItem.setOnClickListener(this);
 
@@ -135,6 +132,7 @@ public class ActivityMain extends AppCompatActivity
             public void onClick(View view)
             {
                 Intent in=new Intent(ActivityMain.this,ActivityNotification.class);
+                in.putExtra("from main","from main");
                 startActivity(in);
             }
         });
@@ -200,6 +198,8 @@ public class ActivityMain extends AppCompatActivity
         tabs.setTextColorResource(R.color.colorAccent);
         tabs.setIndicatorColorResource(R.color.colorAccent);
     }
+
+
 
     @Override
     public void onClick(View v)
@@ -268,18 +268,12 @@ public class ActivityMain extends AppCompatActivity
         }
     }
 
-    @Override
-    protected void onPause()
-    {
-        super.onPause();
-        //setting the flag for fab hide and close management
-        pause_flag=1;
-    }
 
     @Override
     protected void onResume()
     {
         super.onResume();
+        //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         //checking the current activity state and hiding the open fab full menu
         if(pause_flag==1)
             hideMenu(x, y, radiusFromFabToRoot, radiusOfFab);
@@ -534,7 +528,8 @@ public class ActivityMain extends AppCompatActivity
             {
                 mExitHandler.removeCallbacks(mExitRunnable);
                 mExitHandler = null;
-                System.exit(1);
+                finish();
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
             else
             {
@@ -719,8 +714,8 @@ public class ActivityMain extends AppCompatActivity
             }
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        //drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 }

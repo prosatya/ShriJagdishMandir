@@ -6,12 +6,16 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
+import android.transition.Fade;
+import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -37,6 +41,9 @@ import java.util.List;
  */
 public class MainCardFragment extends Fragment
 {
+
+
+
     //fragment class to show fragments as per user selection
     private static final String ARG_POSITION = "position";
 
@@ -70,6 +77,8 @@ public class MainCardFragment extends Fragment
         {
             itemView1=inflater1.inflate(R.layout.pager_main1, null);
 
+
+
             //inflating main fragment of the activity
             AdView adView = (AdView)itemView1.findViewById(R.id.adView);
             // Request for Ads
@@ -80,6 +89,8 @@ public class MainCardFragment extends Fragment
         else if(position==1)
         {
             itemView1=inflater1.inflate(R.layout.pager_main2, null);
+
+
 
             //inflating second fragment of the activity
             AdView adView = (AdView)itemView1.findViewById(R.id.adView);

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.matictechnology.shrijagdishmandir">
+    package="com.matictechnology.shrijagdishmandir"
+    android:versionCode="2"
+    android:versionName="1.1">
 
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
-    <uses-permission android:name="android.permission.INTERNET" />
+
 
     <!-- Register the Alarm Receiver -->
     <application
@@ -17,9 +17,9 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <receiver android:name=".Activity.AlarmReceiver" />
+        <receiver android:name="com.matictechnology.shrijagdishmandir.Activity.AlarmReceiver" />
 
-        <service android:name=".Utility.AlarmService" />
+
 
         <activity
             android:name=".Activity.ActivityMain"
@@ -37,10 +37,6 @@
         <activity
             android:name=".Activity.ActivityUjjain"
             android:label="@string/title_activity_activity_ujjain"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Activity.ActivityImage"
-            android:label="@string/title_activity_activity_image"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activity.ActivityTemple"
@@ -94,6 +90,9 @@
             android:name=".Activity.ActivityAboutUs"
             android:label="@string/title_activity_activity_about_us"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <service android:name="com.matictechnology.shrijagdishmandir.AlarmService" />
+
         <activity
             android:name=".Activity.ActivityFAQs"
             android:label="@string/title_activity_activity_faqs"
@@ -106,7 +105,19 @@
             android:name=".Activity.ActivitySettings"
             android:label="@string/title_activity_activity_settings"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activity.ActivityNotiMsg"></activity>
+        <activity android:name=".Activity.ActivityNotiMsg" />
+
+        <receiver android:name="com.matictechnology.shrijagdishmandir.BroadcastBootReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
     </application>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

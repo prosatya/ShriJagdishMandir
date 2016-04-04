@@ -139,6 +139,20 @@ public class ActivityUjjain extends AppCompatActivity implements View.OnClickLis
         //onclick listener for fab
     }
 
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+        overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
+    }
+
     public class MyPagerAdapter extends FragmentPagerAdapter {
 
         private final String[] TITLES = { "जगदीश मंदिर", "उज्जैन दर्शन","घाट"};

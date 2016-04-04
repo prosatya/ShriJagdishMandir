@@ -30,6 +30,7 @@ public class AcitivitySplashScreen extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+        overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
         //setContentView()
         StartAnimations();
     }
@@ -78,4 +79,10 @@ public class AcitivitySplashScreen extends Activity
 
     }
 
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+
+    }
 }

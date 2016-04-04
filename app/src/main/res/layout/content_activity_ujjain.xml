@@ -8,10 +8,11 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.matictechnology.shrijagdishmandir.Activity.ActivityUjjain"
-    tools:showIn="@layout/activity_ujjain">
+    tools:showIn="@layout/activity_ujjain"
+    android:layout_marginTop="55dp">
 
     <com.astuetz.PagerSlidingTabStrip
-        android:layout_marginTop="60dp"
+
         android:id="@+id/tabs"
         android:background="#FFBF60"
         android:layout_width="match_parent"

@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.Window;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.webkit.WebView;
@@ -24,6 +25,8 @@ import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.kogitune.activitytransition.ActivityTransition;
+import com.kogitune.activitytransition.ExitActivityTransition;
 import com.matictechnology.shrijagdishmandir.R;
 import com.matictechnology.shrijagdishmandir.Utility.AnimatorUtils;
 import com.matictechnology.shrijagdishmandir.Utility.ClipRevealFrame;
@@ -52,9 +55,14 @@ public class ActivityTemple extends AppCompatActivity implements View.OnClickLis
     ImageView image;
     TextView head;
     TextView full_text;
+    private ExitActivityTransition exitTransition;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_temple);
 
@@ -131,7 +139,18 @@ public class ActivityTemple extends AppCompatActivity implements View.OnClickLis
 
         findViewById(R.id.fab).setOnClickListener(this);
         //onclick listener for fab
+        View v=findViewById(imagenm);
+        //Intent in1=new Intent(ActivityTemple.this,ActivityUjjain.class);
+        exitTransition = ActivityTransition.with(getIntent()).to(findViewById(R.id.image), "image").start(savedInstanceState);
     }
+
+    @Override
+    public void onBackPressed()
+    {
+        exitTransition.exit(this);
+    }
+
+
 
     @Override
     public void onClick(View v)

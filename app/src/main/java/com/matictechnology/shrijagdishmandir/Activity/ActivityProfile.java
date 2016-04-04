@@ -127,6 +127,20 @@ public class ActivityProfile extends AppCompatActivity implements View.OnClickLi
     }
 
     @Override
+    protected void onStart()
+    {
+        super.onStart();
+        overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
+    }
+
+    @Override
     public void onClick(View v)
     {
         //setting on click operation for all the click buttons

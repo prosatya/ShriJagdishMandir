@@ -153,6 +153,20 @@ public class ActivityContactUs extends AppCompatActivity implements View.OnClick
     }
 
     @Override
+    protected void onStart()
+    {
+        super.onStart();
+        overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
+    }
+
+    @Override
     public void onClick(View v)
     {
         //setting on click operation for all the click buttons
