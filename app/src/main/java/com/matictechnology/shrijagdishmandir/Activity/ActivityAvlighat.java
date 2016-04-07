@@ -63,10 +63,13 @@ public class ActivityAvlighat extends AppCompatActivity implements View.OnClickL
         toolbar.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.back1));
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        toolbar.setNavigationOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 finish();
+                overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
             }
         });
 

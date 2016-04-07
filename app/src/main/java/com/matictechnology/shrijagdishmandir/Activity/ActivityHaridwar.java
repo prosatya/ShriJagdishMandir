@@ -67,6 +67,7 @@ public class ActivityHaridwar extends AppCompatActivity implements View.OnClickL
             @Override
             public void onClick(View v) {
                 finish();
+                overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
             }
         });
 

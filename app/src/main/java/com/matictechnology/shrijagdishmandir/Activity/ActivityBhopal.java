@@ -67,6 +67,7 @@ public class ActivityBhopal extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onClick(View v) {
                 finish();
+                overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
             }
         });
 
